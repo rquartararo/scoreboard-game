@@ -6,6 +6,6 @@ describe('Leaderboard', () => {
   })
 
   it('displays list of payers and scores', () => {
-    cy.get('li').its('length').should('be.gte', 0)
+    cy.get('.card-container').should('be.visible')
   })
 })

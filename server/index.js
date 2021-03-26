@@ -44,11 +44,15 @@ app.post('/addplayer', (req, res) => {
     })
 })
 
+// gets players to display on leaderboard
 app.get('/getplayers', function (req, res) {
   Leaderboard.find({}, (err, people) => {
     return res.send(people)
   })
 })
+
+// Unknown route handler
+app.use((req, res) => res.sendStatus(404))
 
 app.listen(3001, () =>
   console.log('Express server is running on localhost:3001')

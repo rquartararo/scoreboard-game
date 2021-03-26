@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react'
-import './App.css'
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import './App.scss'
 import Grid from '@material-ui/core/Grid'
-import { useFormik } from 'formik';
+import Form from './components/form'
+import Card from './components/card'
 
 const App = () => {
 
@@ -15,65 +14,38 @@ const App = () => {
   const [players, setPlayers] = useState<PlayerData[]>([])
   const axios = require('axios')
 
+  // semds get request to set list of players to state when the page loads
   useEffect(() => {
     axios.get('/getplayers').then((response: any) => {
       setPlayers(response.data)
     })
   },[axios, setPlayers]);
 
-  // formik makes post request to add player to database and adds new data onto state array
-  const formik = useFormik({
-    initialValues: {
-      name: 'Enter Name',
-    },
-    onSubmit: (values: any) => {
-      const { name } = values
-      const score = Math.floor(Math.random() * 2001) - 1000
-      axios.post('/addplayer', {
-        name: name,
-        score: score
-      })
-      .then((response: any) => {
-        setPlayers(players.concat(response.data))
-      })
-      .catch((error: any) => error)
-    },
-  });
-
   return (
-    <div className="App">
-      <Grid container spacing={3}>
+    <div id="app">
+      <div className="app-container">
+      <Grid container spacing={5}>
         <Grid item xs={12}>
           <h1>The Most Boring Game Ever</h1>
         </Grid>
-        <Grid item xs={8}>
-          <div className="form-container">
-            <form onSubmit={formik.handleSubmit}>
-              <TextField
-                fullWidth
-                id="name"
-                name="name"
-                label="name"
-                value={formik.values.name}
-                onChange={formik.handleChange}
-              />
-              <Button color="primary" variant="contained" fullWidth type="submit">
-                Submit
-              </Button>
-            </form>
-          </div>
+        <Grid item xs={6}>
+          <Form players={players} setPlayers={setPlayers} />
         </Grid>
-        <Grid item xs={4}>
-          <div className="leaderboard-container">
-            <h1>Leaderboard</h1>
+        <Grid item xs={6}>
+          <div className="leaderboard">
+            <div className="leaderboard-container">
+            <h2>Leaderboard</h2>
             <div className="player-list">
+              {/* iterates through list of players and renders a card component for each one */}
               {players.sort((a, b) => b.score - a.score).map((player: any, index) => {
-                return <li key={index} className="list-item">{player.name} {player.score}</li>
+                return <Card key={index} score={player.score} name={player.name} />
               })}
+            </div>
             </div>
           </div>
         </Grid>
       </Grid>
+      </div>
     </div>
   )
 }

@@ -1,0 +1,52 @@
+#app {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 30px;
+  .app-container {
+    max-width: 800px;
+  }
+  h1 {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+  }
+  h2 {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+  }
+  .leaderboard {
+    .leaderboard-container {
+      border: 1px solid #d1d1d1;
+      background-color: rgb(245, 245, 245);
+      border-radius: 4px;
+      padding: 0px 30px;
+      padding-bottom: 20px;
+    }
+    .card-container {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 30px;
+      border: 1px solid #d1d1d1;
+      background-color: white;
+      border-radius: 4px;
+      margin-bottom: 6px;
+      font-family: 'Roboto', sans-serif;
+    }
+    .card-container:hover {
+      background-color: #d1d1d1;
+    }
+  }
+  .form-container {
+    .form {
+      border: 1px solid #d1d1d1;
+      border-radius: 4px;
+      padding: 30px;
+      background-color: rgb(245, 245, 245);
+      .input {
+        padding-bottom: 30px;
+      }
+    }
+  }
+}

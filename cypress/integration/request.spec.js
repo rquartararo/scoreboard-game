@@ -5,13 +5,9 @@ describe('Request', () => {
     cy.visit('http://localhost:3000')
   })
 
-  it('displays random users from API', () => {
-    cy.request('https://jsonplaceholder.typicode.com/users').should(
-      (response) => {
-        expect(response.status).to.eq(200)
-        expect(response).to.have.property('headers')
-        expect(response).to.have.property('duration')
-      }
-    )
+  it('gets all players from API', () => {
+    cy.request('getplayers').should((response) => {
+      expect(response.status).to.eq(200)
+    })
   })
 })

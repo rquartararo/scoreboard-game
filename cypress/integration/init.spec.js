@@ -8,4 +8,10 @@ describe('Cypress', () => {
   it('opens the app', () => {
     cy.visit('http://localhost:3000')
   })
+
+  it('has title', function () {
+    cy.get('h1')
+      .should('be.visible')
+      .and('have.text', 'The Most Boring Game Ever')
+  })
 })
