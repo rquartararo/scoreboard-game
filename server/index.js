@@ -17,8 +17,6 @@ mongoose
   .then(() => console.log('Connected to Mongo DB.'))
   .catch((err) => console.log(err))
 
-const db = mongoose.connection
-
 // sets a schema for the 'leaderboard' collection
 const leaderSchema = new mongoose.Schema({
   name: String,
@@ -26,26 +24,30 @@ const leaderSchema = new mongoose.Schema({
 })
 
 // creates model from new schema
-const Player = mongoose.model('Leaderboard', leaderSchema)
+const Leaderboard = mongoose.model('Leaderboard', leaderSchema)
 
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(pino)
 
 // adds player name and score to leaderboard database
 app.post('/addplayer', (req, res) => {
-  const myPlayer = new Player(req.body)
+  const myPlayer = new Leaderboard(req.body)
   myPlayer
     .save()
     .then((item) => {
       console.log('player saved to database')
+      res.send(item)
     })
     .catch((err) => {
       res.status(400).console.error('unable to save player to database')
     })
 })
 
-app.get('/ping', function (req, res) {
-  return res.send('pong')
+app.get('/getplayers', function (req, res) {
+  Leaderboard.find({}, (err, people) => {
+    return res.send(people)
+  })
 })
 
 app.listen(3001, () =>
