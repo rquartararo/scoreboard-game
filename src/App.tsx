@@ -29,10 +29,10 @@ const App = () => {
         <Grid item xs={12}>
           <h1>The Most Boring Game Ever</h1>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item md={6} xs={12}>
           <Form players={players} setPlayers={setPlayers} />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item md={6} xs={12}>
           <Leaderboard players={players} loading={loading}/>
         </Grid>
       </Grid>
