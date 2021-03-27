@@ -33,7 +33,7 @@ const Form = (props: any) => {
     <div className="form-container">
       <form className="form" onSubmit={formik.handleSubmit}>
         <TextField
-        className="input"
+          className="input"
           fullWidth
           id="name"
           name="name"
@@ -42,7 +42,7 @@ const Form = (props: any) => {
           onChange={formik.handleChange}
         />
         <Button className ="button" color="primary" variant="contained" fullWidth type="submit">
-          Play Game
+          Try Your Luck
         </Button>
       </form>
     </div>

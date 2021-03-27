@@ -10,6 +10,6 @@ describe('Form', () => {
   })
 
   it('shows play game button', function () {
-    cy.get('.button').should('be.visible').and('have.text', 'Play Game')
+    cy.get('.button').should('be.visible').and('have.text', 'Try Your Luck')
   })
 })

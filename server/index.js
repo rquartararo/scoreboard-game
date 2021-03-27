@@ -37,7 +37,7 @@ app.post('/addplayer', (req, res) => {
     .save()
     .then((item) => {
       console.log('player saved to database')
-      res.send(item)
+      res.status(200).send(item)
     })
     .catch((err) => {
       res.status(400).console.error('unable to save player to database')
@@ -47,6 +47,9 @@ app.post('/addplayer', (req, res) => {
 // gets players to display on leaderboard
 app.get('/getplayers', function (req, res) {
   Leaderboard.find({}, (err, people) => {
+    if (err) {
+      res.status(400).console.error('unable to get players from database')
+    }
     return res.send(people)
   })
 })

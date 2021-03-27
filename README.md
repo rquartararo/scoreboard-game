@@ -1,4 +1,4 @@
-# Azeti Code Test
+# Scoreboard Game
 
 Scoreboard game created using:
 
@@ -10,7 +10,7 @@ Scoreboard game created using:
 
 ## To Run
 
-yarn install
+yarn install  
 yarn dev
 
 ## To Test

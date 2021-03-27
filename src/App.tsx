@@ -2,22 +2,23 @@ import React, {useState, useEffect} from 'react'
 import './App.scss'
 import Grid from '@material-ui/core/Grid'
 import Form from './components/form'
-import Card from './components/card'
+import Leaderboard from './components/leaderboard'
+
+interface PlayerData {
+  name: string
+  score: number
+}
 
 const App = () => {
-
-  interface PlayerData {
-    name: string
-    score: number
-  }
-
   const [players, setPlayers] = useState<PlayerData[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
   const axios = require('axios')
 
-  // semds get request to set list of players to state when the page loads
+  // sends get request to set list of players to state when the page loads
   useEffect(() => {
     axios.get('/getplayers').then((response: any) => {
       setPlayers(response.data)
+      setLoading(false)
     })
   },[axios, setPlayers]);
 
@@ -32,17 +33,7 @@ const App = () => {
           <Form players={players} setPlayers={setPlayers} />
         </Grid>
         <Grid item xs={6}>
-          <div className="leaderboard">
-            <div className="leaderboard-container">
-            <h2>Leaderboard</h2>
-            <div className="player-list">
-              {/* iterates through list of players and renders a card component for each one */}
-              {players.sort((a, b) => b.score - a.score).map((player: any, index) => {
-                return <Card key={index} score={player.score} name={player.name} />
-              })}
-            </div>
-            </div>
-          </div>
+          <Leaderboard players={players} loading={loading}/>
         </Grid>
       </Grid>
       </div>
